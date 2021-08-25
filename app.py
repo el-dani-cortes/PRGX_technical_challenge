@@ -19,7 +19,7 @@ with app.app_context():
     db.create_all()
 
 
-@app.route('/extract', methods=['GET'])
+@app.route('/extract', methods=['POST'])
 def add_extraction():
     """Add extract information from path document to database"""
     pdf_path = request.args.get('doc_path')
@@ -53,7 +53,7 @@ def add_extraction():
 def get_extraction_data():
     """Query all data from database"""
     request_data = request.args.get('table_name')
-    if request_data == 'EXTRACTION':
+    if request_data == Data.__tablename__:
         data = Data.query.order_by(Data.id.desc()).all()
         data_schema = DataSchema(many=True)
         result = data_schema.dump(data)

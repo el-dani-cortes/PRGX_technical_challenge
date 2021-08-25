@@ -6,7 +6,7 @@ from models.engine import db, ma
 
 class Data(db.Model):
     """Model of the table for database"""
-    __tablename__ = 'document_data'
+    __tablename__ = 'EXTRACTION'
     id = db.Column(db.Integer, primary_key=True)
     vendor_name = db.Column(db.String(100), nullable=False)
     fiscal_number = db.Column(db.String(50), nullable=False)
@@ -16,8 +16,9 @@ class Data(db.Model):
     comments = db.Column(db.String(500))
     doc_path = db.Column(db.String(100), nullable=False)
 
-class DataSchema(ma.Schema):
+
+class DataSchema(ma.SQLAlchemyAutoSchema):
     """Model to serialize data"""
     class Meta:
-        """ """
+        """Meta class"""
         model = Data
